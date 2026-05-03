@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #050505;
+  color: white;
+  overflow-x: hidden;
+   overflow-y: auto;
+}
+
+/* canvas full screen */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -3;
+}
+
+/* moving ambient glow layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  background: radial-gradient(circle at 20% 30%, rgba(0,150,255,0.15), transparent 40%),
+              radial-gradient(circle at 70% 60%, rgba(180,0,255,0.12), transparent 45%),
+              radial-gradient(circle at 50% 80%, rgba(0,255,200,0.08), transparent 40%);
+  animation: drift 18s infinite linear;
+  z-index: -2;
+}
+
+@keyframes drift {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(-5%, -5%) rotate(180deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+/* insane text glow */
+.hero h1 {
+  font-size: 5rem;
+  text-shadow:
+    0 0 10px rgba(0,150,255,0.6),
+    0 0 30px rgba(120,0,255,0.5),
+    0 0 60px rgba(0,255,200,0.3);
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* glass but alive */
+.project-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(25px);
+  padding: 25px;
+  margin: 20px auto;
+  width: 70%;
+  border-radius: 18px;
+  transition: 0.4s;
+}
+
+.project-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 40px rgba(0,150,255,0.25);
+}
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s ease;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px;
+
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  z-index: 10;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.nav a:hover {
+  opacity: 1;
+}
